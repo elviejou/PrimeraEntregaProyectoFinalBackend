@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
   const products = JSON.parse(fs.readFileSync('./data/productos.json', 'utf-8'));
 
   const newProduct = {
-    id: products.length + 1,
+    id: Math.floor(Math.random() * 10000) + 1, //ID UNICO
     title: req.body.title,
     description: req.body.description,
     code: req.body.code,
