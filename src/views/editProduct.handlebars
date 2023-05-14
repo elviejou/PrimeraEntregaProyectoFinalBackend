@@ -1,0 +1,36 @@
+
+
+<script>
+    function updateProduct(code) {
+        fetch(`http://localhost:8080/products/${code}`, {
+            method: 'put',
+            body: JSON.stringify({
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                price: document.getElementById('price').value,
+                stock: document.getElementById('stock').value,
+                category: document.getElementById('castegory').value,
+                thumbnails: document.getElementById('thumbnails').value
+            }),
+              headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        window.location.href='http://localhost:8080/products'
+        
+    }
+</script>
+
+
+
+<h1>Actualiza un producto</h1>
+<hr />
+<div>
+   Title: <input type="text" value="{{product.title}}" ><br>
+    Description: <input type="text" value="{{product.description}}" ><br>
+    Price: <input type="text" value="{{product.price}}" ><br>
+    Stock: <input type="number" value="{{product.stock}}" ><br>
+    Category <input type="text" value="{{product.category}}" ><br>
+    Thumbnails: <input type="text" value="{{product.thumbnails}}" ><br>
+    <button onclick="updatePokemon('{{product.code}}')">Actulizar Producto</button>
+</div>

@@ -1,12 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const fs = require('fs');
+import { Router } from 'express'
+const router = Router()
+
+
 
 //FUNCION PARA LEER LO QUE ASIGNEMOS A "FILENAME" (TODOS LOS ARCHIVOS QUE ESTAN DENTRO DE LA CARPETA DATA)
 function readFile(filename) {
   console.log('Reading file:', filename);
   return new Promise((resolve, reject) => {
-    fs.readFile(`./data/${filename}`, 'utf8', (err, data) => { //RUTA DE LOS ARCHIVOS
+    fs.readFile(`./src/data/${filename}`, 'utf8', (err, data) => { //RUTA DE LOS ARCHIVOS
       if (err) {
         reject(err);
       } else {
@@ -28,7 +29,7 @@ function readFile(filename) {
 //FUNCION PARA ESCRIBIR A LO QUE ASIGNEMOS A "FILENAME" (TODOS LOS ARCHIVOS QUE ESTAN DENTRO DE LA CARPETA DATA)
 function writeFile(filename, data) {
    return new Promise((resolve, reject) => {
-      fs.writeFile(`./data/${filename}`, JSON.stringify(data), (err) => { //RUTA DE LOS ARCHIVOS
+      fs.writeFile(`./src/data/${filename}`, JSON.stringify(data), (err) => { //RUTA DE LOS ARCHIVOS
          if (err) {
             reject(err);
          } else {
@@ -84,4 +85,4 @@ router.post('/:cid/products', async (req, res) => {
    res.json(carts[cartIndex]);
 });
 
-module.exports = router;
+export default router

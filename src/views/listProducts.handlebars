@@ -1,0 +1,27 @@
+<script>
+  function deleteProduct(code) {
+    fetch(`http://localhost:8080/products/${code}`, {
+      method: "delete"
+    })
+    window.location.href = 'http://localhost:8080/products'
+  }
+</script>
+<div>
+    Lista de Productos
+</div>
+<div>
+<ul id="products">
+    <div>
+      {{#each products}}
+      <li>{{this.title}} - 
+        {{this.description}}
+        {{this.price}}
+        {{this.code}}
+        {{this.stockk}}</li>
+        <img src="{{this.thumbnails}}" alt="" width="100">
+        <button onclick="deleteProduct('{{this.code}}')">Delete {{this.code}}</button>
+      
+      {{/each}}
+    </div>  
+    </ul>
+</div>
