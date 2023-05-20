@@ -2,7 +2,6 @@ import { Router } from 'express'
 import productModel from '../models/product.model.js'
 const router = Router()
 
-router.get('/', (req, res) => res.render('index'))
 
 //BORRA UN PRODUCTO (EJ: DEL localhost:8080/products/4)
 router.delete('/:code', async (req, res) => {
