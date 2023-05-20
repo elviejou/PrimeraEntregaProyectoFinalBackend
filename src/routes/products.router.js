@@ -2,7 +2,7 @@ import { Router } from 'express'
 import productModel from '../models/product.model.js'
 const router = Router()
 
-router.get('/', (req, res) => res.render('index'))
+
 
 //BORRA UN PRODUCTO (EJ: DEL localhost:8080/products/4)
 router.delete('/:code', async (req, res) => {
@@ -24,10 +24,33 @@ router.get('/create', (req, res) => {
     res.render('createProduct', {})
 })
 
-//LISTAMOS LOS PRODUCTOS localhost:8080/products/
-router.get('/', async  (req, res) => {
+
+
+
+router.get("/view", async (req, res) => {
     const products = await productModel.find().lean().exec()
-    res.render('listProducts', { products })
+    res.render('realTimeProducts', {
+        data: products
+    })
+})
+
+//LISTAMOS LOS PRODUCTOS localhost:8080/products/
+
+
+router.get('/', async  (req, res) => {
+    try {
+        let page = parseInt(req.query.page)
+        if (!page) page = 1
+        const result = await productModel.paginate({}, {page, limit:5, lean: true})
+
+        result.prevLink = result.hasPrevPage ? `/products?page=${result.prevPage}` : 'products'
+        result.nextLink = result.hasNextPage ? `/products?page=${result.nextPage}` : 'products'
+        console.log(result)
+        res.render('listProducts', { products: result.docs, hasNextPage: result.hasNextPage, hasPrevPage: result.hasPrevPage, nextLink: result.nextLink, prevLink: result.prevLink });
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Hubo un error al intentar obtener los productos.')
+    }
 });
 
 

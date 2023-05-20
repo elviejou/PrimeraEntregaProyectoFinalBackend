@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import paginate from 'mongoose-paginate-v2';
+import mongoose from "mongoose";
+import mongoosePaginate from 'mongoose-paginate-v2'
 
 
-const productCollection = 'products'
+const productCollection = "products"
 
-const productSchema = new mongoose.Schema  ({
+const productSchema = new mongoose.Schema({
 
     title: { type: String, required: true, index: true},
     description: { type: String, required: true},
@@ -15,12 +15,8 @@ const productSchema = new mongoose.Schema  ({
     thumbnail : { type: String, required: true}
 
 });
-productSchema.plugin(paginate);
-
-
-
-
-
-const productModel = mongoose.model(productCollection, productSchema);
+mongoose.set("strictQuery", false)
+productSchema.plugin(mongoosePaginate)
+const productModel = mongoose.model(productCollection, productSchema)
 
 export default productModel

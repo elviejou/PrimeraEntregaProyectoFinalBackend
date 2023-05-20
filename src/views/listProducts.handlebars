@@ -9,19 +9,25 @@
 <div>
     Lista de Productos
 </div>
-<div>
-<ul id="products">
-    <div>
-      {{#each products}}
-      <li>{{this.title}} - 
-        {{this.description}}
+{{#if products}}
+    {{#each products}}
+        <div class="product">
+            {{this.description}}
         {{this.price}}
         {{this.code}}
         {{this.stockk}}</li>
         <img src="{{this.thumbnails}}" alt="" width="100">
         <button onclick="deleteProduct('{{this.code}}')">Delete {{this.code}}</button>
-      
-      {{/each}}
-    </div>  
-    </ul>
+        </div>
+    {{/each}}
+{{else}}
+    <p>No hay productos disponibles.</p>
+{{/if}}
+
+{{#if hasPrevPage}}
+    <a href="{{prevLink}}">Página anterior</a>
+{{/if}}
+{{#if hasNextPage}}
+    <a href="{{nextLink}}">Página siguiente</a>
+{{/if}}
 </div>

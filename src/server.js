@@ -2,6 +2,7 @@ import express from 'express'
 import handlebars from 'express-handlebars';
 import productsRouter from './routes/products.router.js';
 // import cartsRouter from './routes/carts.router.js';
+import productModel from "./models/product.model.js"
 import mongoose from 'mongoose';
 
 
@@ -12,7 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 
-//MOTOR DE PLATILLA
+//MOTOR DE PLANTILLA
 app.engine('handlebars', handlebars.engine())
 app.set('views', './src/views')
 app.set('view engine', 'handlebars')
