@@ -3,7 +3,6 @@ import productModel from '../models/product.model.js'
 const router = Router()
 
 
-
 //BORRA UN PRODUCTO (EJ: DEL localhost:8080/products/4)
 router.delete('/:code', async (req, res) => {
     const code = req.params.code
