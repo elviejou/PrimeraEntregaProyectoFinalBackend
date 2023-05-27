@@ -35,8 +35,12 @@ router.get("/view", async (req, res) => {
 
 //LISTAMOS LOS PRODUCTOS localhost:8080/products/
 
+const auth = (req, res, next) => {
+    if (req.session.user) return next()
+    return res.send('Debe esyat loguead para ver los productos')
+}
 
-router.get('/', async  (req, res) => {
+router.get('/', auth, async  (req, res) => {
     try {
         let page = parseInt(req.query.page)
         if (!page) page = 1
