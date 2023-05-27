@@ -7,6 +7,10 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import sessionRouter from './routes/session.router.js'
+import __dirname from './utils.js';
+import passport from 'passport';
+import initializePassport from './passport.config.js'
+
 
 
 
@@ -47,6 +51,11 @@ const auth = (req, res, next) => {
   if (req.session.user) return next()
   return res.send('Authentication error')
 }
+
+initializePassport() 
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.get('/api/login', (req, res) => {
   const { username, password } = req.query

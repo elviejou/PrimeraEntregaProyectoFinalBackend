@@ -37,7 +37,7 @@ router.get("/view", async (req, res) => {
 
 const auth = (req, res, next) => {
     if (req.session.user) return next()
-    return res.send('Debe esyat loguead para ver los productos')
+    return res.send('Debe estar logueado para ver los productos')
 }
 
 router.get('/', auth, async  (req, res) => {
